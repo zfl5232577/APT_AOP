@@ -33,3 +33,5 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     api project(':aop_annotation')
 }
+
+apply from: rootProject.file('gradle/jcenter-push.gradle')

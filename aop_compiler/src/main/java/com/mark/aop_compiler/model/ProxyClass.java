@@ -48,7 +48,7 @@ public class ProxyClass {
     }
 
     //proxytool.IProxy
-    public static final ClassName IPROXY = ClassName.get("proxytool.api", "IProxy");
+    public static final ClassName IPROXY = ClassName.get("com.mark.aop_api", "IProxy");
     //android.view.View
     public static final ClassName VIEW = ClassName.get("android.view", "View");
     //android.view.View.OnClickListener
@@ -111,7 +111,6 @@ public class ProxyClass {
 
         //添加包名
         String packageName = mElementUtils.getPackageOf(mTypeElement).getQualifiedName().toString();
-
         //生成file文件
         return JavaFile.builder(packageName, finderClass).build();
     }

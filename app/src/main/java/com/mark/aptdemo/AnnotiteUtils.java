@@ -16,19 +16,23 @@ import java.lang.reflect.Method;
  * </pre>
  */
 public class AnnotiteUtils {
-    public static void injectViews(Activity activity){
+    private static Method findViewById;
+
+    public static void injectViews(Activity activity) {
         Class<? extends Activity> clazz = activity.getClass();
         Field[] declaredFields = clazz.getDeclaredFields();
-        for (Field field : declaredFields){
+        for (Field field : declaredFields) {
             InjectView injectView = field.getAnnotation(InjectView.class);
-            if (injectView!=null){
+            if (injectView != null) {
                 int viewID = injectView.value();
-                if (viewID!=0){
+                if (viewID != 0) {
                     try {
-                        Method findViewById = clazz.getMethod("findViewById", int.class);
-                        Object resView = findViewById.invoke(activity,viewID);
+                        if (findViewById == null) {
+                            findViewById = clazz.getMethod("findViewById", int.class);
+                        }
+                        Object resView = findViewById.invoke(activity, viewID);
                         field.setAccessible(true);
-                        field.set(activity,resView);
+                        field.set(activity, resView);
                     } catch (NoSuchMethodException e) {
                         e.printStackTrace();
                     } catch (IllegalAccessException e) {

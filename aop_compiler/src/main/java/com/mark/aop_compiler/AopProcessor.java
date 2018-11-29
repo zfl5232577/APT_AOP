@@ -71,7 +71,7 @@ public class AopProcessor extends AbstractProcessor {
         //处理被ViewById注解的元素
         for (Element element : roundEnv.getElementsAnnotatedWith(InjectView.class)) {
             if (!isValid(InjectView.class, "fields", element)) {
-                return true;
+                continue;
             }
             parseViewById(element);
         }
@@ -80,13 +80,12 @@ public class AopProcessor extends AbstractProcessor {
         //处理被Click注解的元素
         for (Element element : roundEnv.getElementsAnnotatedWith(OnClick.class)) {
             if (!isValid(OnClick.class, "methods", element)) {
-                return true;
+                continue;
             }
             try {
                 parseClick(element);
             } catch (IllegalArgumentException e) {
                 error(element, e.getMessage());
-                return true;
             }
         }
 
@@ -135,6 +134,7 @@ public class AopProcessor extends AbstractProcessor {
         //被注解的变量所在的类
         TypeElement classElement = (TypeElement) element.getEnclosingElement();
         String qualifiedName = classElement.getQualifiedName().toString();
+        System.out.println(qualifiedName+"=============================================");
         ProxyClass proxyClass = mProxyClassMap.get(qualifiedName);
         if (proxyClass == null) {
             //生成每个宿主类所对应的代理类，后面用于生产java文件

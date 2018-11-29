@@ -8,3 +8,4 @@ dependencies {
     implementation 'com.google.guava:guava:24.1-jre'
     implementation project(':aop_annotation')
 }
+apply from: rootProject.file('gradle/jcenter-push.gradle')

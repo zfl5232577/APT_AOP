@@ -6,6 +6,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mark.aop_annotation.OnClick;
+import com.mark.aop_api.AopTool;
 import com.mark.aoplibrary.annotation.TimeLog;
 
 public class MainActivity extends AppCompatActivity {
@@ -93,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         inti1();
         inti2();
+        AopTool.bind(this);
         tv_aop.setText("找到了");
     }
 
